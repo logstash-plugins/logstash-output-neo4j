@@ -1,6 +1,5 @@
-require 'logstash/namespace'
-require 'logstash/outputs/base'
-require 'logstash/outputs/timetree/timetree'
+require "logstash/namespace"
+require "logstash/outputs/base"
 
 class LogStash::Outputs::Neo4j < LogStash::Outputs::Base
 
@@ -12,9 +11,10 @@ class LogStash::Outputs::Neo4j < LogStash::Outputs::Base
   attr_reader :tree
 
   def register
-    require 'neo4j'
-    if Neo4j::Session.current.nil?
-      @session = ::Neo4j::Session.open(:embedded_db, @path, auto_commit: true)
+    require "neo4j"
+    require "logstash/outputs/timetree/timetree"
+    if !Neo4j::Session.current
+      @session = ::Neo4j::Session.open(:embedded_db, @path, :auto_commit => true)
       @session.start
     end
     @session = Neo4j::Session.current

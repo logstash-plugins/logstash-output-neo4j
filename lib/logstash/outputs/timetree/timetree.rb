@@ -1,5 +1,5 @@
-require 'neo4j'
-require 'logstash/outputs/timetree/model'
+require "neo4j"
+require "logstash/outputs/timetree/model"
 
 module Neo4jrb
   class TimeTree
@@ -31,11 +31,9 @@ module Neo4jrb
             MATCH (a:`TimeTree::Year`{value:#{start_time.year}})-[:`child`]->(b:`TimeTree::Month`{value:#{start_time.month}})-[:`child`]->(d:`TimeTree::Day`{value:#{start_time.day}})
             WITH d MATCH (e:`TimeTree::Event`)<-[:`child`]-(d)
             RETURN e
-        QUERY
-      resultset = Neo4j::Session.query(query)
-      resultset.map { |r| r.e }.to_a
+      QUERY
+      run_query(query)
     end
-
 
     def refresh_tree(ts)
       year  = append_element(@root,  ::TimeTree::Year, ts.year)
@@ -54,7 +52,7 @@ module Neo4jrb
         selected = childs.select { |e| e.props[:value] == value }
         return selected.first if !selected.empty?
       end
-      node  = find_or_create(clazz, root, {:value => value})
+      node = find_or_create(clazz, root, {:value => value})
       set_edge_to_first_node(root, node) if childs.empty?
       ::TimeTree::Child.create(:from_node => root, :to_node => node)
       set_edge_to_last_node(root, node)
@@ -67,7 +65,7 @@ module Neo4jrb
            p.class == root.class && (!root.is_a?(::TimeTree::Root) && p.props[:value] == root.props[:value])
          end
       end.flatten
-      if nodes.empty? then clazz.create(criteria) else nodes.first end
+      ( nodes.empty? ? clazz.create(criteria) : nodes.first )
     end
 
     def set_edge_to_first_node(root, node)
@@ -96,6 +94,12 @@ module Neo4jrb
 
     def has(base, dir)
       base.nodes(:dir => dir, :type => :child)
+    end
+
+    private
+    def run_query(query)
+      resultset = Neo4j::Session.query(query)
+      resultset.map(&:e).to_a
     end
 
   end

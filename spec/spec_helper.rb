@@ -1,4 +1,5 @@
-require 'logstash/outputs/neo4j'
+require "neo4j"
+require "logstash/outputs/neo4j"
 
 def load_fixture(name)
   IO.read("spec/fixtures/#{name}")
