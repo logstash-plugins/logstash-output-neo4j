@@ -1,4 +1,5 @@
 require 'spec_helper'
+require "logstash/outputs/timetree/timetree"
 
 describe 'Neo4jrb::Timetree' do
 

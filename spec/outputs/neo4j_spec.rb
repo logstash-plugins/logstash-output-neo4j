@@ -9,12 +9,12 @@ describe "outputs/neo4j" do
     let(:output) { LogStash::Plugin.lookup("output", "neo4j").new("path" => "/tmp/db") }
 
     it "should register" do
-      expect {output.register}.to_not raise_error
+      expect { output.register }.to_not raise_error
     end
 
     it "should teardown" do
       output.register
-      expect {output.teardown}.to_not raise_error
+      expect { output.teardown }.to_not raise_error
     end
   end
 
@@ -31,7 +31,7 @@ describe "outputs/neo4j" do
 
     it "receive a message" do
       output.receive(event)
-      events    = tree.events_at(event.to_hash["@timestamp"].time)
+      events = tree.events_at(event.to_hash["@timestamp"].time)
       expect(events.count).to eq(1)
     end
 
