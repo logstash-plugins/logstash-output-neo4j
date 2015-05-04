@@ -12,6 +12,8 @@ rescue Bundler::BundlerError => e
   exit e.status_code
 end
 
+require 'logstash/devutils/rake'
+
 require 'rspec'
 require 'rspec/core/rake_task'
 
