@@ -1,4 +1,4 @@
-require 'spec_helper'
+require_relative "../spec_helper"
 require "logstash/plugin"
 require "logstash/json"
 

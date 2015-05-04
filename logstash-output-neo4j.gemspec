@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
 
   s.name            = 'logstash-output-neo4j'
-  s.version         = '0.9.1'
+  s.version         = '0.9.2'
   s.licenses        = ['Apache License (2.0)']
   s.summary         = "Logstash Output to Neo4j"
   s.description     = "Output events to Neo4j"
