@@ -22,7 +22,7 @@ class LogStash::Outputs::Neo4j < LogStash::Outputs::Base
   end
 
   def receive(event)
-    return unless output?(event)
+    
     payload = event.to_hash
     timestamp = payload["@timestamp"].time
     @tree.add_event(timestamp, payload)
