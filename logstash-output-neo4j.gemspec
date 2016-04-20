@@ -4,7 +4,7 @@ Gem::Specification.new do |s|
   s.version         = '2.0.4'
   s.licenses        = ['Apache License (2.0)']
   s.summary         = "Logstash Output to Neo4j"
-  s.description     = "Output events to Neo4j"
+  s.description     = "This gem is a Logstash plugin required to be installed on top of the Logstash core pipeline using $LS_HOME/bin/logstash-plugin install gemname. This gem is not a stand-alone program"
   s.authors         = ["Pere Urbon-Bayes"]
   s.email           = 'pere.urbon@gmail.com'
   s.homepage        = "http://purbon.com/"
