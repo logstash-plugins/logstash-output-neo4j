@@ -1,5 +1,6 @@
 :plugin: neo4j
 :type: output
+:default_codec: plain
 
 ///////////////////////////////////////////
 START - GENERATED VARIABLES, DO NOT EDIT!
@@ -51,3 +52,5 @@ The path within your file system where the neo4j database is located
 
 [id="plugins-{type}s-{plugin}-common-options"]
 include::{include_path}/{type}.asciidoc[]
+
+:default_codec!:
